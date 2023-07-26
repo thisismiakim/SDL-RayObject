@@ -3,7 +3,9 @@
 
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <cmath>
 #include "RGB.h"
+#include "Vec3.h"
 
 typedef struct point {
     float x;
@@ -26,9 +28,6 @@ typedef struct sphere {
     float radius;
     RGB color;
 } sphere;
-
-
-
 
 
 

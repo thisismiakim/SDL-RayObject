@@ -3,6 +3,7 @@
 
 #include <stdexcept>
 #include <cmath>
+#include <array>
 
 // Define a Vec3 struct
 struct Vec3{
@@ -47,9 +48,19 @@ struct Vec3{
 
 };
 
-// dot product
+// calculate dot product of two vectors
 inline double dot(const Vec3& v1, const Vec3& v2){
     return (v1.x*v2.x + v1.y*v2.y + v1.z*v2.z);
 }
+
+// calculate cross product of two vectors
+inline std::array<double, 3> cross(const std::array<double, 3>& v1, const std::array<double, 3>& v2){
+    return {
+        v1[1]*v2[2] - v1[2]*v2[1],
+        v1[2]*v2[0] - v1[0]*v2[2],
+        v1[0]*v2[1] - v1[1]*v2[0]
+    };
+}
+
 
 #endif
