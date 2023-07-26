@@ -1,33 +1,37 @@
-// triangle struct
-
-// .cpp 로 빼도 되고
-// bool intersect
-// update
-// get normal
-
 #ifndef TRIANGLE_H_
 #define TRIANGLE_H_
 
+
 #include "Vec3.h"
+#include "ray.h"
 
 typedef struct triangle{
-    Vec3 p1, p2, p3;
+    Vec3 v0, v1, v2;
 } triangle;
 
-// Vector3 normal; 
-// 미리 계산되거나 
-// (vertex2 - vertex1)과 (vertex3 - vertex1)의 cross product로 계산됩니다.
 
-
-
-bool rayTriangleIntersect()
+// Möller–Trumbore algorithm
+bool rayTriangleIntersect(
+    const Vec3 &origin, const Vec3 &dir, // Ray origin position vector and a direction vector
+    const Vec3 &v0, const Vec3 &v1, const Vec3 &v2, // three vertices of a triangle
+    float &t, float &u, float &v) // temp vectors
 {
+    // 삼각형의 두 변을 계산
+    Vec3 v0v1 = v1 - v0;
+    Vec3 v0v2 = v2 - v0;
+
+    // 레이의 방향과 삼각형의 한 변의 벡터곱을 계산
+    Vec3 rayDir = dir;
+    Vec3 pvec = rayDir.cross(v0v2);
+    double det = dot(v0v1, pvec);
+    
+
+
+
 
 
 
     return true;
 }
-
-// -> 레이트레이싱 알고리즘
 
 #endif

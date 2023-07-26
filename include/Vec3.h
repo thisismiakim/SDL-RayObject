@@ -39,11 +39,18 @@ struct Vec3{
         }
     }
 
+
     // normalize
     Vec3 normalize() const {
         // divide vector by its magnitude
         double mag = sqrt(x*x + y*y + z*z);
         return Vec3(x/mag, y/mag, z/mag);
+    }
+
+    // cross product
+    Vec3 cross (const Vec3& v)
+    {    
+        return Vec3(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x);
     }
 
 };
@@ -53,14 +60,9 @@ inline double dot(const Vec3& v1, const Vec3& v2){
     return (v1.x*v2.x + v1.y*v2.y + v1.z*v2.z);
 }
 
-// calculate cross product of two vectors
-inline std::array<double, 3> cross(const std::array<double, 3>& v1, const std::array<double, 3>& v2){
-    return {
-        v1[1]*v2[2] - v1[2]*v2[1],
-        v1[2]*v2[0] - v1[0]*v2[2],
-        v1[0]*v2[1] - v1[1]*v2[0]
-    };
-}
+
+
+
 
 
 #endif
