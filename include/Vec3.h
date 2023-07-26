@@ -5,6 +5,9 @@
 #include <cmath>
 #include <array>
 
+#define PI 3.14159265359
+#define EPSILON 1e-9
+
 // Define a Vec3 struct
 struct Vec3{
     double x;
