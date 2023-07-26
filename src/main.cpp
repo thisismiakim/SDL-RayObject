@@ -5,7 +5,8 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_image.h>
 
-#include <math.h>
+#include <cmath>
+
 
 #include "SDLFunctions.h"
 #include "color.h"
@@ -14,8 +15,9 @@
 #include "app.h"
 #include "graphicFunctions.h"
 #include "appFunctions.h"
-
 #include "RGB.h"
+#include "Vec3.h"
+#include "Tracing.h"
 
 
 int main(int argc, char *argv[])
@@ -53,6 +55,8 @@ int main(int argc, char *argv[])
                     break;
             }
         }
+
+        // Raytracing here ..
 
         // Draw the new content on the renderer
         //DrawSquare(app.square.xpos, app.square.ypos);

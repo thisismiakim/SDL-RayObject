@@ -1,11 +1,18 @@
-#ifndef __TRACING__
-#define __TRACING__
+#ifndef TRACING_H_
+#define TRACING_H_
 
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include "color.h"
 #include "object.h"
 #include "RGB.h"
+#include "Vec3.h"
+
+
+
+
+
+
 
 RGB trace_obj(point src, point dir, sphere sphere){
     
