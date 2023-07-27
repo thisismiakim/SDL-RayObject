@@ -68,7 +68,10 @@ void TracingSphere(point centre, float rad, RGB color)
         }
     }
 
-
 }
+
+
+// Tracing a triangle
+
 
 #endif

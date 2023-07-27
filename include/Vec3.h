@@ -67,5 +67,4 @@ inline double dot(const Vec3& v1, const Vec3& v2){
 
 
 
-
 #endif
