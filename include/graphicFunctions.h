@@ -8,7 +8,6 @@
 #include "app.h"
 #include "graphicFunctions.h"
 #include "appFunctions.h"
-#include "RGB.h"
 #include "Vec3.h"
 #include "triangle.h"
 
@@ -28,7 +27,7 @@ static void ClearScreen(SDL_Renderer* renderer){
 
 // Tracing a triangle
 // This function traces a triangle and draws it on the screen
-void TracingTriangle(triangle triangle1, RGB color)
+void TracingTriangle(triangle triangle1)
 {
     // Set the render draw colour
     SDL_SetRenderDrawColor(app.render, Colors::GREEN.r, Colors::GREEN.g, Colors::GREEN.b, Colors::GREEN.a);

@@ -14,9 +14,11 @@ struct Vec3{
     double y;
     double z;
 
+    // default constructor
+    Vec3() : x(0.0f), y(0.0f), z(0.0f) {}
     // Constructor that takes three double values as parameters and initializes the data members
     Vec3(double x, double y, double z) : x(x), y(y), z(z) {}
-
+    
     // Overload the + (addition),- (subtraction) operators
     // v1 is other vector
     Vec3 operator + (const Vec3& v1) const {
