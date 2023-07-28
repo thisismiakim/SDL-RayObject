@@ -8,11 +8,7 @@
 #include "RGB.h"
 #include "Vec3.h"
 
-
-
-
-
-
+// this is for sphere.. maybe delete?
 
 RGB trace_obj(point src, point dir, sphere sphere){
     

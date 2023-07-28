@@ -1,10 +1,9 @@
 #ifndef COLOR_H_
 #define COLOR_H_
 
-#include <iostream>
 #include <SDL2/SDL.h>
 
-
+/* Define a namespace for colours */
 namespace Colors{
     SDL_Color BLACK = {0, 0, 0, SDL_ALPHA_OPAQUE};
     SDL_Color WHITE = {255, 255, 255, SDL_ALPHA_OPAQUE};

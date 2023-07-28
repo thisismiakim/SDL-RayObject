@@ -8,7 +8,7 @@
 #define PI 3.14159265359
 #define EPSILON 1e-9
 
-// Define a Vec3 struct
+/* Define a Vec3 struct */
 struct Vec3{
     double x;
     double y;
@@ -34,6 +34,7 @@ struct Vec3{
     }
 
     Vec3 operator / (double s) const {
+        // Check for division by zero
         if (s != 0.0){
             return Vec3(x/s, y/s, z/s);
         }
@@ -43,11 +44,11 @@ struct Vec3{
     }
 
 
-    // normalize
+    // normalize a vector
     Vec3 normalize() const {
         // divide vector by its magnitude
-        double mag = sqrt(x*x + y*y + z*z);
-        return Vec3(x/mag, y/mag, z/mag);
+        double mag = sqrt(x*x + y*y + z*z); // Calculate the magnitude of the vector
+        return Vec3(x/mag, y/mag, z/mag); // Divide each component of the vector by its magnitue
     }
 
     // cross product
@@ -62,9 +63,6 @@ struct Vec3{
 inline double dot(const Vec3& v1, const Vec3& v2){
     return (v1.x*v2.x + v1.y*v2.y + v1.z*v2.z);
 }
-
-
-
 
 
 #endif

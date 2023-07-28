@@ -1,9 +1,9 @@
 #ifndef GRAPHIC_H_
 #define GRAPHIC_H_
 
-#include <iostream>
 #include <SDL2/SDL.h>
 
+/* Define a namespace for screen creation */
 namespace Graphics{
     struct Screen
     {
