@@ -74,30 +74,31 @@ int main(int argc, char *argv[])
 
         // win surface 대신 width/height?
         // 알고리즘은 맞는데 드로잉 방식이 틀린듯함
-        for (int x=0; x < app.screenSurface->w; ++x)
-        {
-            for (int y=0; y < app.screenSurface->h; ++y)
-            {
-                Vec3 origin(0,0,0);
-                Vec3 dir(float(x)/app.screenSurface->w,float(y)/app.screenSurface->h,1);
-                dir = dir.normalize();
+        // for (int x=0; x < app.screenSurface->w; ++x)
+        // {
+        //     for (int y=0; y < app.screenSurface->h; ++y)
+        //     {
+        //         Vec3 origin(0,0,0);
+        //         Vec3 dir(float(x)/app.screenSurface->w,float(y)/app.screenSurface->h,1);
+        //         dir = dir.normalize();
 
-                double t, u, v;
-                if (rayTriangleIntersect(origin, dir,
-                                        triangle1.v0, triangle1.v1, triangle1.v2,
-                                        t, u, v ))
-                    {
-                    ((Uint32*)app.screenSurface->pixels)[(y*app.screenSurface->w)+x] = SDL_MapRGB(app.screenSurface->format, 255, 255, 255);
-                    }
-            }
+        //         double t, u, v;
+        //         if (rayTriangleIntersect(origin, dir,
+        //                                 triangle1.v0, triangle1.v1, triangle1.v2,
+        //                                 t, u, v ))
+        //             {
+        //             ((Uint32*)app.screenSurface->pixels)[(y*app.screenSurface->w)+x] = SDL_MapRGB(app.screenSurface->format, 255, 255, 255);
+        //             }
+        //     }
 
-        }
+        // }
         
+        TracingTriangle(triangle1,{255 , 250, 0} );
 
 
 
         // Update the screen with the content rendered in the background buffer
-        SDL_UpdateWindowSurface(app.window);
+        //SDL_UpdateWindowSurface(app.window);
         SDL_RenderPresent(app.render);
         SDL_Delay(100);
 

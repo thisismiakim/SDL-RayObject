@@ -13,6 +13,8 @@
 #include "appFunctions.h"
 #include "RGB.h"
 #include "Tracing.h"
+#include "Vec3.h"
+#include "triangle.h"
 
 
 
@@ -56,6 +58,8 @@ void TracingSphere(point centre, float rad, RGB color)
                 SDL_SetRenderDrawColor( renderer, h.color.r, h.color.g, h.color.b, 0xFF );
                 SDL_RenderDrawPoint(renderer, x, y);
             }*/
+
+
             point origin = { 0, 0, 0 };
             point direction = { float(x - 500), float(y - 500), 200 };
 
@@ -63,6 +67,7 @@ void TracingSphere(point centre, float rad, RGB color)
 
 
             SDL_SetRenderDrawColor(app.render, col.r, col.g, col.b, 255);
+            
             SDL_RenderDrawPoint(app.render, x, y);
             //printf("col= %u,%u,%u\n", col.r, col.g, col.b);
         }
@@ -71,7 +76,30 @@ void TracingSphere(point centre, float rad, RGB color)
 }
 
 
-// Tracing a triangle
 
+// Tracing a triangle
+void TracingTriangle(triangle triangle1, RGB color)
+{
+
+    SDL_SetRenderDrawColor(app.render, Colors::GREEN.r, Colors::GREEN.g, Colors::GREEN.b, Colors::GREEN.a);
+    for (int x=0; x < app.screen.WIDTH; ++x)
+    {
+        for (int y=0; y < app.screen.HEIGHT; ++y)
+        {
+            Vec3 origin(0,0,0);
+            Vec3 dir(float(x)/app.screen.WIDTH,float(y)/app.screen.HEIGHT,1);
+            dir = dir.normalize();
+
+            double t, u, v;
+            if (rayTriangleIntersect(origin, dir,
+                                    triangle1.v0, triangle1.v1, triangle1.v2,
+                                    t, u, v ))
+                {
+                    SDL_RenderDrawPoint(app.render, x, y);
+                }
+        }
+
+    }
+}
 
 #endif

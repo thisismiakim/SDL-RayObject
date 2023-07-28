@@ -11,7 +11,7 @@ struct App
 {
     SDL_Window* window;
     SDL_Renderer* render;
-    SDL_Surface* screenSurface = SDL_GetWindowSurface(window);
+    //SDL_Surface* screenSurface = SDL_GetWindowSurface(window);
     Graphics::Screen screen;
 
     square square
