@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdint.h> //Uint32
 
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
@@ -16,6 +17,7 @@
 #include "RGB.h"
 #include "Vec3.h"
 #include "triangle.h"
+
 
 
 int main(int argc, char *argv[])
@@ -69,11 +71,30 @@ int main(int argc, char *argv[])
         TracingTriangle(triangle1,{255 , 250, 0} );
 
 
-
         // Update the screen with the content rendered in the background buffer
         SDL_RenderPresent(app.render);
         SDL_Delay(100);
 
+
+        SDL_Surface* surface = SDL_CreateRGBSurfaceWithFormat(0, app.screen.WIDTH, app.screen.HEIGHT, 32, SDL_PIXELFORMAT_RGBA32);
+        if (surface == NULL) {
+            std::cout << "Surface creation failed with error:  "<< SDL_GetError() << std::endl; // Print error if there's an error
+            return EXIT_FAILURE;
+        }
+
+        // Copy renderer to surface
+        if (SDL_RenderReadPixels(app.render, NULL, SDL_PIXELFORMAT_RGBA32, surface->pixels, surface->pitch) != 0) {
+            std::cout << "Reading pixels from renderer failed with error:  "<< SDL_GetError() << std::endl; // Print error if there's an error
+            return EXIT_FAILURE;
+        }
+
+        // Save Surface image
+        if (IMG_SavePNG(surface, "./img/output.png") != 0) {
+            std::cout << "Saving surface to file failed with error:  "<< SDL_GetError() << std::endl; // Print error if there's an error
+            return EXIT_FAILURE;  
+        }
+
+        SDL_FreeSurface(surface);
     }
 
     ShutdownApp();
