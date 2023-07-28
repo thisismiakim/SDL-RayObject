@@ -10,13 +10,11 @@
 #include "SDLFunctions.h"
 #include "color.h"
 #include "graphic.h"
-#include "object.h"
 #include "app.h"
 #include "graphicFunctions.h"
 #include "appFunctions.h"
 #include "RGB.h"
 #include "Vec3.h"
-#include "Tracing.h"
 #include "triangle.h"
 
 
@@ -58,9 +56,6 @@ int main(int argc, char *argv[])
         }
         
         // Draw the new content on the renderer
-
-        // DrawSquare(app.square.xpos, app.square.ypos);
-        // TracingSphere({0, 0, 10}, 5, {255 , 250, 0} );
 
         // 여기서 obj.txt 데이터를 가져오면 되는거 같고..
 

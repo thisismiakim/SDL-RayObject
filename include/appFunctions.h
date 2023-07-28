@@ -6,7 +6,6 @@
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 #include "SDLFunctions.h"
-#include "object.h"
 #include "app.h"
 #include "graphicFunctions.h"
 
