@@ -1,10 +1,10 @@
-# Ray Triangle
+# Ray Tracing
 
 <img width="1023" alt="rayTriangle" src="./img/RayTriangle-output.png">
 <img width="1023" alt="rayTriangle" src="./img/lowRes.png">
 
 ## Description
-##### This code ray traces a simple triangle and load Object from object.txt file
+##### This code ray traces a simple triangle and load object from object.txt file
 
 
 ## Compilation
