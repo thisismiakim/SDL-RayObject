@@ -10,7 +10,7 @@
 ## Compilation
 ##### This requires SDL2 and SDL2 image library
 
-#### Configure and build the project
-###### make
-###### ./build/debug/play
+## Configure and build the project
+##### make
+##### ./build/debug/play
 
