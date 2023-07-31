@@ -30,7 +30,7 @@ static void ClearScreen(SDL_Renderer* renderer){
 void TracingTriangle(triangle triangle1)
 {
     // Set the render draw colour
-    SDL_SetRenderDrawColor(app.render, Colors::GREEN.r, Colors::GREEN.g, Colors::GREEN.b, Colors::GREEN.a);
+    SDL_SetRenderDrawColor(app.render, Colors::BLUE.r, Colors::BLUE.g, Colors::BLUE.b, Colors::BLUE.a);
     // loop over the entire screen and trace the triangle
     for (int x=0; x < app.screen.WIDTH; ++x)
     {

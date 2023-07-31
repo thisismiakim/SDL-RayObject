@@ -60,7 +60,6 @@ int main(int argc, char *argv[])
         
         // Draw the new content on the renderer
 
-        // 여기서 obj.txt 데이터를 가져오면 되는거 같고..
         std::vector<Vec3> data;
         std::ifstream file("object.txt");
 
@@ -79,34 +78,16 @@ int main(int argc, char *argv[])
             std::cout << "failed";
         }
 
-        // triangle dataTri{
-        //     data[0],
-        //     data[1],
-        //     data[2]
-        // };
-
-
 
         // triangle
-        triangle triangle1 {
-            Vec3(-1, 1,3),
-            Vec3(1,-1,3),
-            Vec3(0,1,3)
-
-            // for each 3번 반복해서 v를 넣으면 됨
-            // array로 데이터?
+        triangle centerTriangle {
+            Vec3(1.0f, 0.5f, 2.0f),
+            Vec3(1.5f,1.5f,2.0f),
+            Vec3(0.5f,1.5f,2.0f)
         };
 
-        triangle triangle2{
-            Vec3(1.294361019e+01, 954203606e+00, 080653763e+01),
-            Vec3(1.418311119e+01,-621198177e+00, 5.931306458e+01),
-            Vec3(1.410698414e+01,6.146854401e+00, 940632629e+01)
-        };
-        // 삼각형 로드에 실패
 
-
-        TracingTriangle(triangle2);
-
+        TracingTriangle(centerTriangle);
 
         // Update the screen with the content rendered in the background buffer
         SDL_RenderPresent(app.render);
