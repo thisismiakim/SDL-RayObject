@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <string>
 
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
@@ -18,6 +19,54 @@
 #include "appFunctions.h"
 #include "Vec3.h"
 #include "triangle.h"
+
+struct TriangleOBJ
+{
+    Vec3 v1, v2, v3;
+};
+
+int numTriangles = 0; // this is a counter for triangles in object.txt file
+
+std::vector<TriangleOBJ> loadTriangles(const std::string& filename)
+{
+    std::vector<TriangleOBJ> triangles;
+    std::ifstream file("objectLite.txt");
+
+    if (!file.is_open())
+    {
+        std::cout << "Failed to open the file." << std::endl;
+        return triangles;
+    }
+
+        std::string line;
+        int triangleCount = 0; 
+        while (std::getline(file, line)) 
+        {
+            std::istringstream iss(line);
+            TriangleOBJ triangle;
+            char comma; // To discard the comma character
+
+            // Read x, y, z for v1
+            iss >> triangle.v1.x >> comma >> triangle.v1.y >> comma >> triangle.v1.z;
+            
+            // Read x, y, z for v2
+            iss >> triangle.v2.x >> comma >> triangle.v2.y >> comma >> triangle.v2.z;
+            
+            // Read x, y, z for v3
+            iss >> triangle.v3.x >> comma >> triangle.v3.y >> comma >> triangle.v3.z;
+
+            triangles.push_back(triangle);
+            numTriangles++;
+        }
+
+
+    file.close();
+
+    return triangles;
+    
+}
+
+
 
 
 
@@ -58,28 +107,11 @@ int main(int argc, char *argv[])
             }
         }
         
-        // Draw the new content on the renderer
 
-        std::vector<Vec3> data;
-        std::ifstream file("object.txt");
-
-        if (file.is_open()){
-            std::string line;
-            while (std::getline(file, line)){
-                std::istringstream iss(line);
-                Vec3 v;
-                if (iss >> v.x >> v.y >>v.z){
-                    data.push_back(v);
-                }
-            }
-            file.close();
-        }
-        else{
-            std::cout << "failed";
-        }
+        /* Load Object */
 
 
-        // triangle
+        // a center basic triangle
         triangle centerTriangle {
             Vec3(1.0f, 0.5f, 2.0f),
             Vec3(1.5f,1.5f,2.0f),
@@ -87,7 +119,27 @@ int main(int argc, char *argv[])
         };
 
 
-        TracingTriangle(centerTriangle);
+        // Object.txt first triangle
+        triangle newTriangle{
+            Vec3(float(1.294361019e+01),float(8.954203606e+00), float(6.080653763e+01)),
+            Vec3(float(1.418311119e+01),float(7.621198177e+00), float(5.931306458e+01)),
+            Vec3(float(1.410698414e+0), float(6.146854401e+00), float(5.940632629e+01))
+        };
+
+
+        // Load Object.txt
+        std::vector<TriangleOBJ> triangles = loadTriangles("triangles.txt");
+        
+        // numTriangles
+        for (int i=0; i < numTriangles; i++){
+            triangle Object{
+            Vec3(triangles[i].v1.x,triangles[i].v1.y, triangles[i].v1.z),
+            Vec3(triangles[i].v2.x,triangles[i].v2.y, triangles[i].v2.z),
+            Vec3(triangles[i].v3.x, triangles[i].v3.y, triangles[i].v3.z)
+             };
+            TracingTriangle(Object);
+        }
+
 
         // Update the screen with the content rendered in the background buffer
         SDL_RenderPresent(app.render);
