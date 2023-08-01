@@ -13,12 +13,15 @@
 
 #include "SDLFunctions.h"
 #include "color.h"
+#include "RGB.h"
+#include "object.h"
 #include "graphic.h"
 #include "app.h"
 #include "graphicFunctions.h"
 #include "appFunctions.h"
 #include "Vec3.h"
 #include "triangle.h"
+#include "Tracing.h"
 
 struct TriangleOBJ
 {
@@ -30,7 +33,7 @@ int numTriangles = 0; // this is a counter for triangles in object.txt file
 std::vector<TriangleOBJ> loadTriangles(const std::string& filename)
 {
     std::vector<TriangleOBJ> triangles;
-    std::ifstream file("objectLite.txt");
+    std::ifstream file("object.txt");
 
     if (!file.is_open())
     {
@@ -67,7 +70,7 @@ std::vector<TriangleOBJ> loadTriangles(const std::string& filename)
 }
 
 
-
+// -------------------------------------------------------------------------------------
 
 
 int main(int argc, char *argv[])
@@ -107,39 +110,59 @@ int main(int argc, char *argv[])
             }
         }
         
+        // -------------------------------------------------------------------------------------
 
         /* Load Object */
 
-
-        // a center basic triangle
+        // --------  a center basic triangle
         triangle centerTriangle {
             Vec3(1.0f, 0.5f, 2.0f),
             Vec3(1.5f,1.5f,2.0f),
             Vec3(0.5f,1.5f,2.0f)
         };
 
+        // Tracing object code uncomment this when you are not rendering the object
+        //TracingTriangle(centerTriangle);
 
-        // Object.txt first triangle
+
+        // --------- Object.txt first triangle
         triangle newTriangle{
             Vec3(float(1.294361019e+01),float(8.954203606e+00), float(6.080653763e+01)),
             Vec3(float(1.418311119e+01),float(7.621198177e+00), float(5.931306458e+01)),
             Vec3(float(1.410698414e+0), float(6.146854401e+00), float(5.940632629e+01))
         };
 
+        // Tracing object code uncomment this when you are not rendering the object
+        //TracingTriangle(newTriangle);
 
-        // Load Object.txt
+
+
+        // ---------- Tracing Sphere
+        //TracingSphere({0, 0, 10}, 5, {Colors::BLUE.r, Colors::BLUE.g, Colors::BLUE.b} );
+
+
+        // ---------   Load Object.txt
+        // Tracing object code uncomment this when you are not rendering the object
         std::vector<TriangleOBJ> triangles = loadTriangles("triangles.txt");
         
         // numTriangles
-        for (int i=0; i < numTriangles; i++){
+        // int i=0; i < numTriangles; i++ 
+        // set to 1000 triangles (for fast rendering speed)
+        for (int i=0; i < 2000; i++){
             triangle Object{
             Vec3(triangles[i].v1.x,triangles[i].v1.y, triangles[i].v1.z),
             Vec3(triangles[i].v2.x,triangles[i].v2.y, triangles[i].v2.z),
             Vec3(triangles[i].v3.x, triangles[i].v3.y, triangles[i].v3.z)
              };
-            TracingTriangle(Object);
+
+            
+            TracingTriangle(Object);   
         }
 
+
+
+
+        // -------------------------------------------------------------------------------------
 
         // Update the screen with the content rendered in the background buffer
         SDL_RenderPresent(app.render);

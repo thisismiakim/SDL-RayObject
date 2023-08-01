@@ -40,7 +40,7 @@ static bool InitApp(){
 
     // create a SDL window
     app.window = SDL_CreateWindow(
-        "Ray Triangle", // window title
+        "Ray Tracing", // window title
         SDL_WINDOWPOS_CENTERED, // window x position
         SDL_WINDOWPOS_CENTERED, // window y position
         app.screen.WIDTH, // window width
