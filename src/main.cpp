@@ -28,6 +28,7 @@ struct TriangleOBJ
     Vec3 v1, v2, v3;
 };
 
+
 int numTriangles = 0; // this is a counter for triangles in object.txt file
 
 std::vector<TriangleOBJ> loadTriangles(const std::string& filename)
@@ -88,7 +89,6 @@ int main(int argc, char *argv[])
     while(running){
         ClearScreen(app.render);
 
-
         // Check and process I/O events
         // key events
         if (SDL_PollEvent(&event))
@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
 
         /* Load Object */
 
-        // --------  a center basic triangle
+        // --------  (1) a center basic triangle
         triangle centerTriangle {
             Vec3(1.0f, 0.5f, 2.0f),
             Vec3(1.5f,1.5f,2.0f),
@@ -122,10 +122,11 @@ int main(int argc, char *argv[])
         };
 
         // Tracing object code uncomment this when you are not rendering the object
+        // *********
         //TracingTriangle(centerTriangle);
 
 
-        // --------- Object.txt first triangle
+        // --------- (2) Object.txt first triangle
         triangle newTriangle{
             Vec3(float(1.294361019e+01),float(8.954203606e+00), float(6.080653763e+01)),
             Vec3(float(1.418311119e+01),float(7.621198177e+00), float(5.931306458e+01)),
@@ -133,30 +134,80 @@ int main(int argc, char *argv[])
         };
 
         // Tracing object code uncomment this when you are not rendering the object
+        // *********
         //TracingTriangle(newTriangle);
 
 
 
-        // ---------- Tracing Sphere
+        // ---------- (3) Tracing Sphere
+        // *********
         //TracingSphere({0, 0, 10}, 5, {Colors::BLUE.r, Colors::BLUE.g, Colors::BLUE.b} );
 
 
-        // ---------   Load Object.txt
+        // ---------   (4) Load Object.txt
+        // ********* uncomment below
         // Tracing object code uncomment this when you are not rendering the object
-        std::vector<TriangleOBJ> triangles = loadTriangles("triangles.txt");
+        // std::vector<TriangleOBJ> triangles = loadTriangles("triangles.txt");
         
-        // numTriangles
-        // int i=0; i < numTriangles; i++ 
-        // set to 1000 triangles (for fast rendering speed)
-        for (int i=0; i < 2000; i++){
-            triangle Object{
-            Vec3(triangles[i].v1.x,triangles[i].v1.y, triangles[i].v1.z),
-            Vec3(triangles[i].v2.x,triangles[i].v2.y, triangles[i].v2.z),
-            Vec3(triangles[i].v3.x, triangles[i].v3.y, triangles[i].v3.z)
-             };
+        // for (int i=0; i < numTriangles; i++){
+        //     triangle Object{
+        //     Vec3(triangles[i].v1.x,triangles[i].v1.y, triangles[i].v1.z),
+        //     Vec3(triangles[i].v2.x,triangles[i].v2.y, triangles[i].v2.z),
+        //     Vec3(triangles[i].v3.x, triangles[i].v3.y, triangles[i].v3.z)
+        //      };
 
             
-            TracingTriangle(Object);   
+        //     TracingTriangle(Object);   
+        // }
+
+        // ------------- Light Source Raytracing
+        // ********* uncomment below
+        
+        for (int i = 0; i < 2; i++) 
+        {
+            scene[i].centre.x = rand() % 19 - 9;
+            scene[i].centre.y = rand() % 19 - 9;
+            scene[i].centre.z = rand() % 15 + 20;
+            scene[i].radius = rand() % 5 + 1;
+            scene[i].color.r = (rand() % 900) * 0.001 + 0.01;
+            scene[i].color.g = (rand() % 900) * 0.001 + 0.01;
+            scene[i].color.b = (rand() % 900) * 0.001 + 0.01;
+        }
+
+        sphere scene[2] = { {{0, 0, 10}, 5, {255 , 255, 0}},
+        {{10, 5, 10}, 2, {255 , 0, 255}} };
+
+        for (int x = 0; x < app.screen.WIDTH; x++) 
+        {
+            for (int y = 0; y< app.screen.HEIGHT; y++) 
+            {
+                point origin = { 0, 0, 0 };
+                Vec3 direction = { float(x - 640), float(y - 384), 700 };
+                RGB col = { 0, 0, 0 };
+
+                for (int i = 0; i < 2; i++) 
+                {
+                    direction.x += (rand() & 0xffff) / ((float)0xffff) - 0.5;
+                    direction.y += (rand() & 0xffff) / ((float)0xffff) - 0.5;
+                    direction.normalize();
+
+                    hit h = traceScene(origin, direction);
+                    if (h.hit) {
+
+                        RGB thisC = shade(origin, direction, h);
+                        col.r += thisC.r;
+                        col.g += thisC.g;
+                        col.b += thisC.b;
+                    }
+                }
+                col.r /= 2;
+                col.g /= 2;
+                col.b /= 2;
+
+                SDL_SetRenderDrawColor(app.render, col.r, col.g, col.b, 0xFF);
+                SDL_RenderDrawPoint(app.render, x, y);
+            }
+            
         }
 
 
